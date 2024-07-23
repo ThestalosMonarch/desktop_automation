@@ -48,7 +48,7 @@ def main():
     #bot.execute(exePath)
     app = bot.connect_to_app(backend=Backend.UIA, path=exePath, title="My CRM (Sample App)")
 
-    """     first_field = bot.find_app_element(from_parent_window=app.top_window(), auto_id = "textBoxPeopleFirstName")
+    first_field = bot.find_app_element(from_parent_window=app.top_window(), auto_id = "textBoxPeopleFirstName")
     first_field.set_text("Thestalos")
     
     last_field = bot.find_app_element(from_parent_window=app.top_window(), auto_id = "textBoxPeopleLastName")
@@ -58,13 +58,32 @@ def main():
     company_tab.select()
 
     other_tab = bot.find_app_element(from_parent_window=app.top_window(), control_type ="TabItem", title="Other")
-    other_tab.select() """
+    other_tab.select() 
 
     state_dropdown = bot.find_app_element(from_parent_window = app.top_window(), auto_id = "comboBoxPeopleAddressState", title = "State:")
     state_dropdown.click_input()
 
     list_item = bot.find_app_element(from_parent_window = app.top_window(), title = "AK", control_type = "ListItem")
     list_item.click_input()
+
+    is_active_checkbox = bot.find_app_element(from_parent_window=app.top_window(), auto_id = "checkBox1")
+    is_active_checkbox.toggle()
+    is_active_checkbox.click()
+    print(is_active_checkbox.get_toggle_state())
+
+    if is_active_checkbox.get_toggle_state() == 0:
+        print("The checkbox is unchecked, let's check it!")
+        is_active_checkbox.toggle()
+    else:
+        print("Checkbox already checked!")
+
+    save_btn =  bot.find_app_element(from_parent_window=app.top_window(), auto_id = "button1")
+    save_btn.click()
+
+    #other_tab = bot.find_app_element(from_parent_window=app.top_window(), control_type ="TabItem", title="Other")
+    other_tab.select() 
+    browse_btn =  bot.find_app_element(from_parent_window=app.top_window(), auto_id = "button2")
+    browse_btn.click()
     #state_dropdown.select("AZ")
     # Uncomment to mark this task as finished on BotMaestro
     # maestro.finish_task(
